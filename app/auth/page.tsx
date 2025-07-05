@@ -4,13 +4,14 @@ import Button from "@/app/components/button/button";
 import Input from "@/app/components/input/input";
 import { setUser } from "@/lib/storage";
 import { validateMobileNumber } from "@/lib/validation";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./auth.module.scss";
 
 export default function AuthPage() {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleLogin = async () => {
     // Validate mobile number
@@ -32,7 +33,7 @@ export default function AuthPage() {
       setUser(user);
 
       // Redirect to the dashboard
-      redirect("/dashboard");
+      router.push("/dashboard");
     } catch (err) {
       setError("لطفاً دوباره تلاش کنید");
     }
